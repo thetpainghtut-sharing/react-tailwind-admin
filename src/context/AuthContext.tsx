@@ -2,9 +2,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
   id: string;
+  name: string;
   email: string;
   password: string;
   role: 'admin' | 'user';
+  token?: string;
 }
 
 type AuthContextType = {
@@ -33,31 +35,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(false);
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (email: string, password: string) => {
     try {
       // Simulate login logic
-      // const response = await fetch("/api/login", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ username, password }),
-      // });
+      const response = await fetch("https://fakestoreapi.com/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: email, password }),
+      });
 
-      // if (response.ok) {
+      console.log(response);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+
         const fakeUser: User = {
           id: '1',
-          email: username,
+          name: 'AABBCC',
+          email: email,
           password,
-          role: 'admin'
+          role: 'admin',
+          token: data.token
         }
-        // const data = await response.json();
         setUser(fakeUser);
         localStorage.setItem("user", JSON.stringify(fakeUser)); // Update user in localStorage with fakeUser);
         setError(null);
-      // } else {
-      //   setError("Invalid username or password");
-      // }
+      } else {
+        setError("Invalid username or password");
+      }
     } catch (error) {
       setError("An error occurred during login");
     } finally {
