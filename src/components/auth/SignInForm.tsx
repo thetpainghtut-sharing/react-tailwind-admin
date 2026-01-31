@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
@@ -13,12 +13,10 @@ export default function SignInForm() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(username,password);
-    navigate('/');
   }
 
   return (
