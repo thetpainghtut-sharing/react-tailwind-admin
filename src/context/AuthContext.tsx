@@ -26,7 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     // const token = localStorage.getItem("token");
@@ -66,7 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setUser(user);
         localStorage.setItem("user", JSON.stringify(user)); // Update user in localStorage with fakeUser);
         setError(null);
-        navigate('/');
+        // navigate('/');
       } else {
         setError("Invalid username or password");
       }
