@@ -3,18 +3,18 @@ import PageBreadcrumb from "../components/common/PageBreadCrumb";
 import PageMeta from "../components/common/PageMeta";
 import { DepartmentService } from "../services/DepartmentService";
 import { Department } from "../types/department.types";
-import Button from "../components/ui/button/Button";
-import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 
-export default function Blank() {
-  const navigate = useNavigate();
-
-  const [data, setData] = useState<Department[]>([]);
+export default function BlankDetail() {
+  const { id } = useParams<{ id: string }>(); // 1. Get ID from URL
+  const [data, setData] = useState<Department| null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    DepartmentService.getAll()
+    if (!id) return;
+
+    DepartmentService.getById(Number(id))
       .then(setData)
       .catch(setError) // Shorthand for (e) => setError(e)
       .finally(() => setLoading(false));
@@ -30,10 +30,7 @@ export default function Blank() {
     return <div style={{ color: 'red' }}>Error: {error}</div>;
   }
 
-  // 3. Handle Empty State (Optional but recommended)
-  if (data.length === 0) {
-    return <div>No departments found.</div>;
-  }
+  if (!data) return <div>Department not found</div>;
 
   return (
     <div>
@@ -42,16 +39,10 @@ export default function Blank() {
         description="This is React.js Blank Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
       <PageBreadcrumb pageTitle="Blank Page" />
-      <h2>Department List</h2>
+      <h2>Department Detail</h2>
       <ul>
-        {/* Use .map() to transform data into JSX */}
-        {data.map((department: Department) => (
-          <li key={department.id}>
-            <strong>{department.title}</strong>
-            {department.createdAgo && <span> - {department.createdAgo}</span>}
-            <Button onClick={() => navigate(`/blank/${department.id}`)}>Detail</Button>
-          </li>
-        ))}
+          <li>Title: <strong>{data.title}</strong></li>
+          <li>Since: {data.createdAgo && <span> - {data.createdAgo}</span>}</li>
       </ul>
     </div>
   );
