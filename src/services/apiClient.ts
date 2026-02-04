@@ -11,9 +11,23 @@ const apiClient: AxiosInstance = axios.create({
 // Request Interceptor
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    // 1. Get the item ONCE
+    const storedUser = localStorage.getItem('user');
+
+    // 2. Check if it exists (is not null and not empty)
+    if (storedUser) {
+      try {
+        const userObj = JSON.parse(storedUser);
+        
+        // 3. Check for token
+        if (userObj.token) {
+          config.headers.Authorization = `Bearer ${userObj.token}`;
+        }
+      } catch (e) {
+        // Optional: Handle corrupted JSON in local storage
+        console.error("Could not parse user data", e);
+        localStorage.removeItem('user'); // Clean up bad data
+      }
     }
     return config;
   },
