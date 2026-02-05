@@ -20,6 +20,9 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import BlankDetail from "./pages/BlankDetail";
+import DepartmentList from "./pages/Departments/DepartmentList";
+import DepartmentDetail from "./pages/Departments/DepartmentDetail";
+import DepartmentForm from "./pages/Departments/DepartmentForm";
 
 export default function App() {
   return (
@@ -42,6 +45,9 @@ export default function App() {
 
             {/* Tables */}
             <Route path="/basic-tables" element={<BasicTables />} />
+            <Route path="/departments" element={<DepartmentList />} />
+            <Route path="/departments/:id" element={<DepartmentDetail />} />
+            <Route path="/departmentform" element={<DepartmentForm />} />
 
             {/* Ui Elements */}
             <Route path="/alerts" element={<Alerts />} />
