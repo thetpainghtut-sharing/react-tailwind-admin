@@ -19,6 +19,8 @@ export default function DepartmentList() {
       .then(setData)
       .catch(setError) // Shorthand for (e) => setError(e)
       .finally(() => setLoading(false));
+
+    
   }, []);
 
   // 1. Handle Loading State

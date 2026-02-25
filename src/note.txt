@@ -1,0 +1,71 @@
+case - mood swing (career, class, life)
+
+
+boc
+1 - ltns
+2 - black world
+3 - moti (mind / body)
+
+
+Forward 
+1 - moti (body / mind)
+2 - see ways
+3 - look the start 
+
+
+Todo 
+1 - knowing myself
+  - 95% (35%)
+  - what is 35%?
+  - 65%?
+
+
+1 - BE (Laravel)
+  - API (CRUD)
+  - API (Auth) login, register, logout - Sanctum (token base)
+  - API (main flow) 
+
+
+2 - FE (React)
+  - SPA - Components (tree)
+  - .tsx
+  - state
+  - prop
+  - context (provider) - data shared
+  
+
+3 - axios (create Client)
+  - pass token
+  - get / post 
+  - 
+
+
+
+React 
+- 
+
+
+
+Employee Form 
+
+- input 5 
+- normal - 3
+- file - 1  ### log 
+- select - 1 ### log 
+
+step 1: create state -> departments []
+step 2: call department service to get all departments -> useEffect
+step 3: binding departments in form select
+
+
+Login 
+step 1: collect email, password from login form -> data?
+step 2: call login function (provider) -> here?
+step 3: network call -> response?
+step 4: store auth user -> ?
+
+
+
+
+
+

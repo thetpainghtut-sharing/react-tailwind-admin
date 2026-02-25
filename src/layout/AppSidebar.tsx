@@ -58,6 +58,11 @@ const navItems: NavItem[] = [
 
     ],
   },
+  {
+    name: "Assign Assest",
+    icon: <ListIcon />,
+    path: "/assign",
+  }
   // {
   //   name: "Pages",
   //   icon: <PageIcon />,

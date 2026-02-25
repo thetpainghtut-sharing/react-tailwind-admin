@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
@@ -15,14 +15,21 @@ export default function SignInForm() {
   const [password, setPassword] = useState<string>("");
   const { loading, error, user, login } = useAuth();
 
-  const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();    
-    login(username,password);
-    navigate('/');
-  }
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
-  if(user) {
-    navigate('/');
+  const handleSubmit= async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+    
+    try {
+      await login(username, password);
+    } catch (err) {
+      // Handle login failure here (e.g., show an error message)
+      console.error("Login failed", err);
+    }
   }
 
   return (

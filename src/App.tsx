@@ -23,6 +23,7 @@ import BlankDetail from "./pages/BlankDetail";
 import DepartmentList from "./pages/Departments/DepartmentList";
 import DepartmentDetail from "./pages/Departments/DepartmentDetail";
 import DepartmentForm from "./pages/Departments/DepartmentForm";
+import AssignAsset from "./pages/Goal/AssignAsset";
 
 export default function App() {
   return (
@@ -60,6 +61,10 @@ export default function App() {
             {/* Charts */}
             <Route path="/line-chart" element={<LineChart />} />
             <Route path="/bar-chart" element={<BarChart />} />
+
+            {/* Goal */}
+            <Route path="/assign" element={<AssignAsset />} />
+
           </Route>
 
           {/* Auth Layout */}
